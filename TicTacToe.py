@@ -13,7 +13,9 @@ if __name__ == "__main__":
         usage()
     elif argv[1] == "t":
         ui = Terminal()
+        ui.run()
     elif argv[1] == "g":
         ui = Gui()
+        ui.run()
     else:
         usage()

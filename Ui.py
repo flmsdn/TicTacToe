@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Ui(ABC):
-
+    '''Class to contain the UI'''
     @abstractmethod
     def run(self):
         raise NotImplementedError

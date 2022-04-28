@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from Game import Game, GameError
+from tkinter import Tk, Frame
 
 class Ui(ABC):
     '''Class to contain the UI'''
@@ -10,10 +11,14 @@ class Ui(ABC):
 
 class Gui(Ui):
     def __init__(self):
-        pass
+        root = Tk()
+        root.title("Tic Tac TOe")
+        frame = Frame(root)
+        frame.pack()
+        self.__root = root
 
     def run(self):
-        pass
+        self.__root.mainloop()
 
 class Terminal(Ui):
     def __init__(self):

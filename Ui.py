@@ -7,6 +7,7 @@ class Ui(ABC):
     def run(self):
         raise NotImplementedError
 
+
 class Gui(Ui):
     def __init__(self):
         pass

@@ -1,3 +1,4 @@
+from Colours import Colour
 class GameError(Exception):
     pass
 
@@ -13,9 +14,9 @@ class Game:
         self.__player = Game.P1
 
     def __repr__(self):
-        s="  | 1 2 3\n---------\n"
+        s="  | " + Colour.BOLD + "1 2 3\n---------\n" + Colour.ENDC
         for c in range(3):
-            s+=f"{c+1} | " + " ".join(self.__board[c]) +"\n"
+            s+=Colour.BOLD + f"{c+1}" + Colour.ENDC + " | " + " ".join(self.__board[c]) +"\n"
         return s
 
     def play(self,row,col):

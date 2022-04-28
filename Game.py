@@ -5,8 +5,8 @@ class GameError(Exception):
 class Game:
 
     EMPTY = "."
-    P1 = Colour.BLUE+"0"+Colour.ENDC
-    P2 = Colour.RED+"X"+Colour.ENDC
+    P1 = Colour.BLUE + Colour.BOLD + "0" + Colour.ENDC
+    P2 = Colour.RED + Colour.BOLD + "X" + Colour.ENDC
     DRAW = "draw"
 
     def __init__(self):
@@ -14,9 +14,9 @@ class Game:
         self.__player = Game.P1
 
     def __repr__(self):
-        s="  | " + Colour.BOLD + "1 2 3\n---------\n" + Colour.ENDC
+        s="  | " + Colour.BOLD + Colour.YELLOW + "1 2 3" + Colour.ENDC + "\n---------\n"
         for c in range(3):
-            s+=Colour.BOLD + f"{c+1}" + Colour.ENDC + " | " + " ".join(self.__board[c]) +"\n"
+            s+=Colour.BOLD + Colour.YELLOW + f"{c+1}" + Colour.ENDC + " | " + " ".join(self.__board[c]) +"\n"
         return s
 
     def play(self,row,col):

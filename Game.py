@@ -5,8 +5,8 @@ class GameError(Exception):
 class Game:
 
     EMPTY = "."
-    P1 = "0"
-    P2 = "X"
+    P1 = Colour.BLUE+"0"+Colour.ENDC
+    P2 = Colour.RED+"X"+Colour.ENDC
     DRAW = "draw"
 
     def __init__(self):

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from Game import Game, GameError
-from tkinter import Tk, Frame
+from tkinter import Tk, Frame, Button, X, Y
 
 class Ui(ABC):
     '''Class to contain the UI'''
@@ -12,13 +12,37 @@ class Ui(ABC):
 class Gui(Ui):
     def __init__(self):
         root = Tk()
-        root.title("Tic Tac TOe")
+        root.geometry("1080x720")
+        root.title("Tic Tac Toe")
         frame = Frame(root)
         frame.pack()
         self.__root = root
+        Button(
+            frame,
+            text="Help",
+            command=self.__showHelp
+        ).pack(fill=X)
+
+        Button(
+            frame,
+            text="Play",
+            command=self.__playGame
+        ).pack(fill=X)
+
+        Button(
+            frame,
+            text="Quit",
+            command=self.__root.quit
+        ).pack(expand = 1, fill=X)
 
     def run(self):
         self.__root.mainloop()
+    
+    def __showHelp(self):
+        pass
+
+    def __playGame(self):
+        pass
 
 class Terminal(Ui):
     def __init__(self):

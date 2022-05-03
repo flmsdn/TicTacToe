@@ -27,6 +27,11 @@ class Game:
         self.__board[row][col] = self.__player
         self.__player = Game.P2 if self.__player == Game.P1 else Game.P1
     
+    def at(self,row, col):
+        row-=1
+        col-=1
+        return self.__board[row][col]
+    
     @property
     def winner(self):
         #check if a player has won

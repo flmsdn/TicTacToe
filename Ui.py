@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from Game import Game, GameError
-from tkinter import Tk, Frame, Button, X, Y
+from tkinter import Tk, Frame, Button, X, Y, Toplevel, StringVar
+from itertools import product
 
 class Ui(ABC):
     '''Class to contain the UI'''
@@ -42,7 +43,23 @@ class Gui(Ui):
         pass
 
     def __playGame(self):
-        pass
+        self.__game = Game()
+
+        gameWin = Toplevel(self.__root)
+        gameWin.title("Game")
+        frame = Frame(gameWin)
+        frame.grid(row=0,column=0)
+
+        self.__buttons = [[None for _ in range(3)] for _ in range(3)]
+        for row,col in product(range(3),range(3)):
+            b=StringVar()
+            b.set(self.__game.at(row+1,col+1))
+            Button(
+                frame,
+                textvariable=b,
+                command=lambda:None
+            ).grid(row=row,column=col)
+        Button (gameWin, text="Dismiss",command=gameWin.destroy).grid(row=1,column=0)
 
 class Terminal(Ui):
     def __init__(self):

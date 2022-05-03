@@ -43,7 +43,7 @@ class Gui(Ui):
         pass
 
     def __playGame(self):
-        self.__game = Game()
+        self.__game = Game(True)
 
         gameWin = Toplevel(self.__root)
         gameWin.title("Game")
@@ -54,12 +54,19 @@ class Gui(Ui):
         for row,col in product(range(3),range(3)):
             b=StringVar()
             b.set(self.__game.at(row+1,col+1))
+            self.__buttons[row][col]=b
+
+            cmd = lambda r=row, c=col: self.__play(r,c)
             Button(
                 frame,
                 textvariable=b,
-                command=lambda:None
+                command=cmd
             ).grid(row=row,column=col)
         Button (gameWin, text="Dismiss",command=gameWin.destroy).grid(row=1,column=0)
+    
+    def __play(self,r,c):
+        self.__game.play(r+1,c+1)
+        self.__buttons[r][c].set(self.__game.at(r+1,c+1))
 
 class Terminal(Ui):
     def __init__(self):

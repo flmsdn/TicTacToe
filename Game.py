@@ -9,7 +9,8 @@ class Game:
     P2 = Colour.RED + Colour.BOLD + "X" + Colour.ENDC
     DRAW = "draw"
 
-    def __init__(self):
+    def __init__(self,GUI=False):
+        if GUI: Game.P1,Game.P2 = "0", "X"
         self.__board = [[Game.EMPTY for _ in range(3)] for _ in range(3)]
         self.__player = Game.P1
 

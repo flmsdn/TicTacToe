@@ -67,6 +67,10 @@ class Gui(Ui):
     def __play(self,r,c):
         self.__game.play(r+1,c+1)
         self.__buttons[r][c].set(self.__game.at(r+1,c+1))
+        if self.__game.winner == Game.DRAW:
+            print("The game was drawn")
+        elif self.__game.winner:
+            print(f"The winner is {self.__game.winner}")
 
 class Terminal(Ui):
     def __init__(self):

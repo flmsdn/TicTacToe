@@ -46,6 +46,7 @@ class Gui(Ui):
         self.__root = root
         self.__console = console
         self.__gameWin=None
+        self.__finished = False
 
     def run(self):
         self.__root.mainloop()

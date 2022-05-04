@@ -43,6 +43,10 @@ class Gui(Ui):
         scroll.config(command=console.yview)
         console.config(yscrollcommand=scroll.set)
 
+        self.__root = root
+        self.__console = console
+        self.__gameWin=None
+
     def run(self):
         self.__root.mainloop()
     
@@ -50,6 +54,7 @@ class Gui(Ui):
         pass
 
     def __playGame(self):
+        if self.__gameWin: return
         self.__game = Game(True)
 
         gameWin = Toplevel(self.__root)
@@ -76,15 +81,26 @@ class Gui(Ui):
         for i in range(3):
             Grid.columnconfigure(frame, i, weight=1)
             Grid.rowconfigure(frame, i, weight=1)
-        Button (gameWin, text="Dismiss",command=gameWin.destroy).grid(row=1,column=0)
+        self.__gameWin= gameWin
+        Button (gameWin, text="Dismiss",command=self.__dismiss).grid(row=1,column=0)
     
+    def __dismiss(self):
+        self.__gameWin.destroy()
+        self.__gameWin = None
+
     def __play(self,r,c):
-        self.__game.play(r+1,c+1)
+        if self.__finished: return
+        try:
+            self.__game.play(r+1,c+1)
+        except GameError as e:
+            self.__console.insert(END,f"{e}\n")
         self.__buttons[r][c].set(self.__game.at(r+1,c+1))
         if self.__game.winner == Game.DRAW:
-            print("The game was drawn")
+            self.__console.insert(END,f"Game was drawn\n")
+            self.__finished=True
         elif self.__game.winner:
-            print(f"The winner is {self.__game.winner}")
+            self.__console.insert(END,f"Game was won by {self.__game.winner}\n")
+            self.__finished=True
 
 class Terminal(Ui):
     def __init__(self):
